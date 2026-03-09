@@ -1,0 +1,81 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #121212;
+  padding: 2vh 2vw;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.status-panel {
+  flex: 7;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2vh;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Status Colors */
+.safe { background-color: #66bb6a; }
+.warning { background-color: #ffee58; }
+.danger { background-color: #ef5350; }
+
+.controls {
+  flex: 3;
+  display: flex;
+  justify-content: space-between;
+  gap: 4vw; /* Broad margin */
+}
+
+.btn {
+  border-radius: 20px;
+  border: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.1s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+  min-height: 80px; /* Minimum height requirement */
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.btn-continue {
+  flex: 1;
+  background-color: #2e7d32; /* Dark Green */
+  font-size: 3vw;
+}
+
+.btn-stop {
+  flex: 1.2; /* Slightly larger width */
+  background-color: #d32f2f; /* Bright Red */
+  font-size: 4vw; /* Slightly larger text */
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(239, 83, 80, 0.4);
+}
+
+
+.btn-reset {
+  flex: 1;
+  background-color: #ff9800; /* Orange for reset/warning */
+  color: #121212;
+  font-size: 4vw;
+  font-weight: 900;
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}

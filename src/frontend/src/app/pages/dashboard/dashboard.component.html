@@ -1,0 +1,15 @@
+<div class="dashboard-container">
+  <!-- Status Indicator -->
+  <div class="status-panel" [ngClass]="status()">
+  </div>
+
+  <!-- Control Buttons -->
+  <div class="controls">
+    @if (status() === 'danger') {
+      <button class="btn btn-stop" (click)="reset()">MANUAL INTERVENTION REQUIRED</button>
+    } @else {
+      <button class="btn btn-continue" (click)="start()">CONTINUE</button>
+      <button class="btn btn-stop" (click)="stop()">STOP</button>
+    }
+  </div>
+</div>

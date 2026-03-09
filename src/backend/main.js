@@ -58,14 +58,16 @@ function handleData(data) {
         for (let c of testi_pesi) {
             if (typeof c[1] == "number" && c[1] >= 0.6) {tp_finali.push(c)}
         }
+
         if (tp_finali.length == 0) {return "HUMAN"}
         if (tp_finali.length == 1) {result = tp_finali[0][0]}
         else {
             tp_finali.sort((a, b) => b[1] - a[1])
-            if (stringSimilarity(tp_finali[0][0].replaceAll(" ", ""), tp_finali[1][0].replaceAll(" ", "")) > 0.7) {
+            if (stringSimilarity(tp_finali[1][0].replaceAll(" ", ""), tp_finali[0][0].replaceAll(" ", "")) > 0.5) {
                 result = tp_finali[0][0]
             }
         }
+        
     }
     // Rende sano il result
     if (!result) {
@@ -74,8 +76,30 @@ function handleData(data) {
     let numeric = new RegExp("[a-zA-Z][0-9]+[a-zA-Z]")
     while (numeric.test(result)) {
         // Finché c'è un'espressione del genere
-        result = result.replaceAll(numeric.exec(result)[0])
+        result = result.replaceAll(
+            numeric.exec(result)[0],
+            numeric.exec(result)[0].replaceAll(
+                "1", "I"
+            ).replaceAll(
+                "2", ""
+            ).replaceAll(
+                "3", "E"
+            ).replaceAll(
+                "4", "A"
+            ).replaceAll(
+                "5", "S"
+            ).replaceAll(
+                "6", ""
+            ).replaceAll(
+                "7", "T"
+            ).replaceAll(
+                "8", ""
+            ).replaceAll(
+                "9", ""
+            ).replaceAll("0", "O")
+        )
     }
+    console.log(result)
 
     // Determinare l'azione da compiere
     if (result.replaceAll(" ", "").includes("DALLE")) {
@@ -137,7 +161,27 @@ function handleData(data) {
     return "HUMAN"
 }  
 
-
+console.log(handleData(
+    {
+    "id_scenario": 40,
+    "sensori": {
+      "camera_frontale": {
+        "testo": "ECCETTO F0RN1TORE DALLE 08:00 ALLE 10:00",
+        "confidenza": 0.9
+      },
+      "camera_laterale": {
+        "testo": "ECCETTO FORNITORE 08-10",
+        "confidenza": 0.77
+      },
+      "V2I_receiver": {
+        "testo": null,
+        "confidenza": null
+      }
+    },
+    "orario_rilevamento": "09:30",
+    "giorno_settimana": "Sabato"
+  }
+))
 // possibili stringhe
 // let ps = []
 // for (let d of dataFile) {
@@ -146,8 +190,8 @@ function handleData(data) {
 //     }
 // }
 // // console.log(ps)
-for (let o of dataFile) {
-    console.log(o["sensori"])
-    console.log(handleData(o))
-    console.log("=============================0")
-}
+// for (let o of dataFile) {
+//     console.log(o["sensori"])
+//     console.log(handleData(o))
+//     console.log("=============================0")
+// }

@@ -1,5 +1,5 @@
 import {stringSimilarity} from 'string-similarity-js'
-import dataFile from './VShuttle-input.json' with {type: "json"}
+import dataFile from '../../VShuttle-input.json' with {type: "json"}
 
 function isDay(daystring, today) {
     return (daystring == today.replaceAll("ì", "i").toUpperCase())
@@ -72,6 +72,10 @@ function handleData(data) {
         return "HUMAN"
     }
     let numeric = new RegExp("[a-zA-Z][0-9]+[a-zA-Z]")
+    while (numeric.test(result)) {
+        // Finché c'è un'espressione del genere
+        result = result.replaceAll(numeric.exec(result)[0])
+    }
 
     // Determinare l'azione da compiere
     if (result.replaceAll(" ", "").includes("DALLE")) {

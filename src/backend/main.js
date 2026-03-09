@@ -2,6 +2,7 @@ import {stringSimilarity} from 'string-similarity-js'
 import dataFile from '../../VShuttle-input.json' with {type: "json"}
 
 function isDay(daystring, today) {
+    if (daystring == "FESTIVI" && (today == "Sabato" || today == "Domenica"))
     return (daystring == today.replaceAll("ì", "i").toUpperCase())
 }
 
@@ -99,6 +100,7 @@ function handleData(data) {
             ).replaceAll("0", "O")
         )
     }
+    result = result.replaceAll(".", "")
     console.log(result)
 
     // Determinare l'azione da compiere
@@ -122,6 +124,27 @@ function handleData(data) {
     if (result.replaceAll(" ", "").includes("ECCETTO") && result.replaceAll(" ", "").includes("BUS")) {
         return "GO"
     }
+    if ((result.replaceAll(" ", "")).includes("AFFISSIONE")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("SENSO")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("LIMITE")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("STAZIONE")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("NAVETTE")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("USCITA")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("FINE")) {
+        return "GO"
+    }
     if (result.replaceAll(" ", "").includes("DIVIETO")) {
         // Arrivando qui si sa già che non c'è un "ECCETTO BUS"
         try {
@@ -137,7 +160,7 @@ function handleData(data) {
         return "GO"
     }
     if (result.replaceAll(" ", "").includes("MERCATO")) {
-        let ex = new RegExp("LUNEDI|MARTEDI|MERCOLEDI|GIOVEDI|VENERDI|SABATO|DOMENICA")
+        let ex = new RegExp("LUNEDI|MARTEDI|MERCOLEDI|GIOVEDI|VENERDI|SABATO|DOMENICA|FESTIVI")
         if (ex.test(
             result.replaceAll(" ", "")
         )) {
@@ -156,32 +179,34 @@ function handleData(data) {
     if (result.replaceAll(" ", "").includes("ATTENZIONE")) {
         return "GO"
     }
+    if (result.replaceAll(" ", "").includes("ECCETTO")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("DIVIETO")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("RALLENTARE")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("STRADA")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("SENSO")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("AREAPEDONALE")) {
+        return "STOP"
+    }
+    if ((result.replaceAll(" ", "")).includes("MERCATO")) {
+        return "GO"
+    }
+    if ((result.replaceAll(" ", "")).includes("ZONA")) {
+        return "GO"
+    }
     
-    //if (result.)
     return "HUMAN"
 }  
 
-console.log(handleData(
-    {
-    "id_scenario": 40,
-    "sensori": {
-      "camera_frontale": {
-        "testo": "ECCETTO F0RN1TORE DALLE 08:00 ALLE 10:00",
-        "confidenza": 0.9
-      },
-      "camera_laterale": {
-        "testo": "ECCETTO FORNITORE 08-10",
-        "confidenza": 0.77
-      },
-      "V2I_receiver": {
-        "testo": null,
-        "confidenza": null
-      }
-    },
-    "orario_rilevamento": "09:30",
-    "giorno_settimana": "Sabato"
-  }
-))
 // possibili stringhe
 // let ps = []
 // for (let d of dataFile) {
@@ -190,8 +215,8 @@ console.log(handleData(
 //     }
 // }
 // // console.log(ps)
-// for (let o of dataFile) {
-//     console.log(o["sensori"])
-//     console.log(handleData(o))
-//     console.log("=============================0")
-// }
+for (let o of dataFile) {
+    console.log(o["sensori"])
+    console.log(handleData(o))
+    console.log("=============================0")
+}

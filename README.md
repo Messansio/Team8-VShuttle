@@ -166,9 +166,9 @@ Follow these steps to launch the dashboard locally:
 
 1\. Clone the repository
 
-git clone https://github.com/your-repo/v-shuttle.git
+git clone https://github.com/Messansio/Team8-VShuttle
 
-cd v-shuttle
+cd Team8-VShuttle
 
 2\. Install dependencies
 
@@ -182,7 +182,7 @@ npm run dev
 
 Once the server is running, open your browser and go to:
 
-http://localhost:3000
+http://localhost:portNumber
 
 5\. Start the simulation
 

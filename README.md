@@ -8,7 +8,7 @@ Sensor Fusion and Human-Centered Dashboard for Autonomous Shuttle Decision Suppo
 \- Andrea Messana — Frontend Engineer    
   Developed the Angular dashboard, implemented the real-time simulation interface, and presented the technical architecture during the final pitch.
 
-\- Pietro Tabbi — Backend Engineer    
+\- Pietro Tabbì — Backend Engineer    
   Implemented the core system logic including sensor fusion, OCR normalization, semantic parsing, and ensured the system worked reliably across scenarios.
 
 \- Danylo Tantsura— Product & Project Lead    
